@@ -1,0 +1,11 @@
+<div class="search-item">
+  <img [src]="item.snippet.thumbnails.medium.url" alt="Thumbnail" />
+  <div class="details">
+    <h3>{{ item.snippet.title }}</h3>
+    <p>{{ item.statistics.viewCount }} views</p>
+    <p>{{ item.statistics.likeCount }} likes</p>
+    <p>{{ item.statistics.dislikeCount }} dislikes</p>
+    <p>{{ item.statistics.commentCount }} comments</p>
+    <p [ngStyle]="{ 'border-color': getBorderColor(item.snippet.publishedAt) }">{{ formatPublishedDate() }}</p>
+  </div>
+</div>
