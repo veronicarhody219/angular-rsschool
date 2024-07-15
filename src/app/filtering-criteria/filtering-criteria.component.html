@@ -1,0 +1,11 @@
+<div class="filtering-criteria">
+  <div class="filter">
+    <label for="filterQuery">Filter by Title:</label>
+    <input type="text" id="filterQuery" [(ngModel)]="query" />
+    <button (click)="onFilter(query)">Apply Filter</button>
+  </div>
+  <div class="sort">
+    <button (click)="onSortByDate(dateAscending)">Sort by Date</button>
+    <button (click)="onSortByViews(viewsAscending)">Sort by Views</button>
+  </div>
+</div>

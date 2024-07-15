@@ -1,22 +1,30 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
-import { SearchItemComponent } from './search/search-item/search-item.component';
-import { SearchResultsComponent } from './search/search-results/search-results.component';
-
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    SearchItemComponent,
-    SearchResultsComponent,
-  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'youtube-client';
+  searchQuery: string = '';
+  filterQuery: string = '';
+  sortDateAscending: boolean | null = null;
+  sortViewsAscending: boolean | null = null;
+
+  onSearchQuery(query: string) {
+    this.searchQuery = query;
+  }
+
+  onFilterQuery(query: string) {
+    this.filterQuery = query;
+  }
+
+  onSortByDate(ascending: boolean) {
+    this.sortDateAscending = ascending;
+  }
+
+  onSortByViews(ascending: boolean) {
+    this.sortViewsAscending = ascending;
+  }
 }

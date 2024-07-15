@@ -3,21 +3,22 @@ import { SearchItem } from '../search-item.model';
 import { DatePipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-item',
   standalone: true,
   imports: [CommonModule, FormsModule],
   providers: [DatePipe],
-
   templateUrl: './search-item.component.html',
   styleUrl: './search-item.component.scss',
 })
 export class SearchItemComponent {
-  constructor(private datePipe: DatePipe) {
+  @Input() item: SearchItem;
+
+  constructor(private datePipe: DatePipe, private router: Router) {
     this.item = {} as SearchItem;
   }
-  @Input() item: SearchItem;
 
   formatPublishedDate(): string {
     if (this.item.snippet.publishedAt) {
@@ -44,5 +45,9 @@ export class SearchItemComponent {
     } else {
       return 'blue';
     }
+  }
+
+  learnMore() {
+    this.router.navigate(['/detail', this.item.id]);
   }
 }

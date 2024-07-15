@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchItem } from '../search-item.model';
 import { SearchItemComponent } from '../search-item/search-item.component';
@@ -11,6 +17,10 @@ import { SearchItemComponent } from '../search-item/search-item.component';
   imports: [SearchItemComponent, CommonModule],
 })
 export class SearchResultsComponent implements OnInit {
+  @Input() searchQuery: string = '';
+  @Input() filterQuery: string = '';
+  @Input() sortDateAscending: boolean | null = null;
+  @Input() sortViewsAscending: boolean | null = null;
   searchResults: SearchItem[] = [];
   videos: SearchItem[] = [];
 
@@ -20,8 +30,6 @@ export class SearchResultsComponent implements OnInit {
 
   loadMockedData(): void {
     this.searchResults = [
-      // Add your mocked data here
-
       {
         kind: 'youtube#video',
         etag: '"Fznwjl6JEQdo1MGvHOGaz_YanRU/tmmI1yiRrmLWlKikXk1gD3TXsUI"',
@@ -780,6 +788,7 @@ export class SearchResultsComponent implements OnInit {
         },
       },
     ];
+    this.videos = [...this.searchResults];
   }
   sortByDate(ascending: boolean): void {
     this.videos.sort((a: SearchItem, b: SearchItem) => {
@@ -800,7 +809,7 @@ export class SearchResultsComponent implements OnInit {
   }
   filterResults(query: string): void {
     this.searchResults = this.searchResults.filter((item) =>
-      item.snippet.title.includes(query)
+      item.snippet.title.includes(query.toLocaleLowerCase())
     );
   }
 }
